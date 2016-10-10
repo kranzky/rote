@@ -1,6 +1,8 @@
 Ruby on the Edge
 ================
 
+An opinionated franken-framework.
+
 12 Factors
 ----------
 
