@@ -6,5 +6,6 @@ require './app/models/all'
 
 get '/' do
   logger.info "whatever"
-  "Hello, world!"
+  @widgets = Widget.all
+  haml :index
 end

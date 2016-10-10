@@ -28,6 +28,8 @@ gem 'pundit', '~> 1.1.0'
 # Templating Engine
 gem 'hamlit', '~> 2.7.2'
 
+# Canard
+
 group :development do
   gem 'github_changelog_generator', '~> 1.13.2'
   gem 'gemfile_updater', '~> 0.1.0'
