@@ -4,6 +4,6 @@ require './app/config/sinatra'
 require './app/config/sequel'
 
 get '/' do
-  STDERR.puts "whatever"
+  logger.info "whatever"
   "Hello, world!"
 end
