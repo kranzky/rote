@@ -1,7 +1,9 @@
 require 'bundler'
 Bundler.require(:default, :development)
-require './config/sinatra'
+require './app/config/sinatra'
+require './app/config/sequel'
 
 get '/' do
+  STDERR.puts "whatever"
   "Hello, world!"
 end

@@ -7,15 +7,25 @@ gem 'puma', '~> 3.6.0'
 # HTTP Framework
 gem 'sinatra', '~> 2.0.0.beta2'
 
-# ORM
-gem 'sequel', '~> 4.38.0'
-
 # Database
 #gem 'sequel_pg', '~> 1.6.17'
 #gem 'pg', '~> 0.18.4'
 
+# ORM
+gem 'sequel', '~> 4.38.0'
+
+# Service Objects
+
 # Frontend Framework
 #gem 'semantic-ui-sass', '~> 2.2.4.0'
+
+# Templating Engine
+
+# Stylesheets
+
+# Client-Side Scripting
+
+# Background Jobs
 
 group :development do
 end

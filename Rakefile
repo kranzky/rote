@@ -1,4 +1,4 @@
 desc "Run IRB with the Sinatra App"
 task :console do
-  exec 'irb -r ./routes/main.rb'
+  exec 'irb -r ./app/routes/main.rb'
 end
