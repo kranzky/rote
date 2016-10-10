@@ -14,27 +14,19 @@ gem 'sequel', '~> 4.39.0'
 
 # Database
 gem 'pg', '~> 0.19.0'
-gem 'sequel_pg', '~> 1.6.17'
+#gem 'sequel_pg', '~> 1.6.17'
 
 # Service Objects
 gem 'aldous', '~> 1.1.3'
 
-# Frontend Framework
-gem 'semantic-ui-sass', '~> 2.2.4.0'
-
-# Templating Engine
-gem 'hamlit', '~> 2.7.2'
-
-# Stylesheets
-gem 'sass', '~> 3.4.22'
-
-# Client-Side Scripting
+# Authorisation
+gem 'pundit', '~> 1.1.0'
 
 # Background Jobs
 #gem 'sidekiq', '~> 4.2.2'
 
-# Authorisation
-gem 'pundit', '~> 1.1.0'
+# Templating Engine
+gem 'hamlit', '~> 2.7.2'
 
 group :development do
   gem 'github_changelog_generator', '~> 1.13.2'

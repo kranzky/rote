@@ -1,14 +1,30 @@
 Ruby on the Edge
 ================
 
-An opinionated franken-framework.
+"Ruby on the Edge", or RotE, is an opinionated franken-framework.
 
-12 Factors
-----------
+Backend
+-------
 
-ref: https://12factor.net/
+* Language: Ruby
+* Rack Server: Puma
+* HTTP Framework: Sinatra
+* ORM: Sequel
+* Database: PostgreSQL
+* Service Objects: Aldous
+* Authorisation: Pundit
+* Background Jobs: Sidekiq
+* Templating Engine: Hamlit
+* Testing: RSpec
 
-Copyright
----------
+Frontend
+--------
+
+* Language: Coffeescript
+* Framework: Semantic UI
+* Stylesheets: SASS
+
+Omakase by Kranzky
+------------------
 
 Copyright (c) 2016 Robots+Rockets.
