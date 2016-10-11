@@ -1,6 +1,6 @@
 desc "Start the console"
 task :console do
-  exec 'irb -r ./app/routes/main.rb'
+  exec 'irb -r ./app/boot.rb'
 end
 
 desc "Create the database"
@@ -13,7 +13,7 @@ end
 
 desc "Dump the schema"
 task :dump do
-  `sequel -D #{ENV.fetch("DATABASE_URL")} > app/config/001_schema.rb`
+  `sequel -D #{ENV.fetch("DATABASE_URL")} > app/config/1_schema.rb`
 end
 
 desc "Load the schema"

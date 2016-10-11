@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # Language
 ruby "2.3.1"
+gem 'require_all', '~> 1.3.3'
 
 # Rack Server
 gem 'puma', '~> 3.6.0'
@@ -14,10 +15,7 @@ gem 'sequel', '~> 4.39.0'
 
 # Database
 gem 'pg', '~> 0.19.0'
-#gem 'sequel_pg', '~> 1.6.17'
-
-# Service Objects
-gem 'aldous', '~> 1.1.3'
+gem 'sequel_pg', '~> 1.6.17', require: false
 
 # Authorisation
 gem 'pundit', '~> 1.1.0'
