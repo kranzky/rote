@@ -10,6 +10,7 @@ end
 module Sinatra
   module RoteHelper
     def respond(class_name, format = :html)
+      logger.info "Processing by #{class_name} as #{format.upcase}"
       action = Module.const_get("App::Actions::#{class_name}").new(params)
       raise RoteError, "bad action" unless action.is_a?(RoteAction)
       raise RoteError, action.errors unless action.valid?
@@ -73,6 +74,10 @@ class RoteBase
   def to_h
     @context
   end
+
+  def logger
+    SemanticLogger['RotE']
+  end
 end
 
 class RoteAction < RoteBase
@@ -126,7 +131,7 @@ class RoteService < RoteBase
     raise RoteError, "bad service result" unless name.is_a?(Symbol)
     Thread.current[:rote][self.name][name] = default
     define_method(name, ->{ @context[name] })
-    define_method("#{name}=", ->(value){ @performed = true; @context[name] = value })
+    define_method("#{name}=", ->(value){ @context[name] = value })
   end
 
   def initialize(arguments={})
@@ -136,6 +141,11 @@ class RoteService < RoteBase
       @context[key] = arguments[key]
     end
     @performed = false
+  end
+
+  def perform
+    logger.info "Perform #{self.class.name.gsub('App::Services::', '')}"
+    @performed = true
   end
 
   def validate
@@ -166,6 +176,7 @@ class RoteView < RoteBase
   end
 
   def render(scope, format)
+    logger.info "Render #{self.class.name.gsub('App::Services::', '')}"
     case format
     when :html
       scope.haml(@template, { scope: self })

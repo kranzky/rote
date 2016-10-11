@@ -10,6 +10,9 @@ gem 'puma', '~> 3.6.0'
 # HTTP Framework
 gem 'sinatra', '~> 2.0.0.beta2'
 
+# Logging
+gem 'semantic_logger', '~> 3.3.0'
+
 # ORM
 gem 'sequel', '~> 4.39.0'
 
