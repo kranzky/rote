@@ -9,13 +9,13 @@ module App::Services
     end
 
     def validate_arguments
-#     validates_presence :query
-#     validates_type String, :query
+      validates_not_null :query
+      validates_type String, :query
     end
 
     def validate_results
-#     validates_presence :widgets
-#     validates_type Array, :widgets
+      validates_not_null :widgets
+      validates_type Array, :widgets
     end
   end
 end
