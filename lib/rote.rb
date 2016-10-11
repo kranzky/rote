@@ -88,8 +88,12 @@ class RoteAction < RoteBase
     @success = true
   end
 
+  def success?
+    @success
+  end
+
   def perform(sentence)
-    return unless @success
+    return unless success?
     class_name = sentence.split.map(&:capitalize).join
     service = Module.const_get("App::Services::#{class_name}").new(self.to_h)
     raise unless service.is_a?(RoteService)
@@ -98,14 +102,10 @@ class RoteAction < RoteBase
       raise unless service.valid?
       @context.merge!(service.to_h)
     end
-    @success
+    success?
   end
 
-  def success?
-    @success
-  end
-
-  def build(class_name)
+  def render(class_name)
     view = Module.const_get("App::Views::#{class_name}").new(self.to_h)
     raise unless view.is_a?(RoteView)
     raise unless view.valid?

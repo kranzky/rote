@@ -4,7 +4,7 @@ module App::Actions::Widgets
 
     def handle
       perform "search widgets"
-      build "Widgets::SearchResults"
+      render "Widgets::SearchResults"
     end
 
     def validate

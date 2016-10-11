@@ -12,3 +12,5 @@ autoload_rel 'workers'
 
 require_rel 'config'
 require_rel 'routes'
+
+include App

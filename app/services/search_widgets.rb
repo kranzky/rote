@@ -4,8 +4,7 @@ module App::Services
     result :widgets, []
 
     def perform
-      self.widgets = App::Models::Widget.all
-      true
+      self.widgets = Models::Widget.all
     end
 
     def validate_arguments
