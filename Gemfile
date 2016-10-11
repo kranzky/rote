@@ -31,8 +31,6 @@ gem 'jbuilder', '~> 2.6.0'
 gem 'yajl-ruby', '~> 1.2.1'
 gem 'tilt-jbuilder', '~> 0.7.1', require: 'sinatra/jbuilder'
 
-# Canard
-
 group :development do
   gem 'github_changelog_generator', '~> 1.13.2'
   gem 'gemfile_updater', '~> 0.1.0'

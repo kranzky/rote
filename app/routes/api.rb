@@ -1,3 +1,3 @@
-get('/api') do
+get '/api' do
   respond "Widgets::Search", :json
 end

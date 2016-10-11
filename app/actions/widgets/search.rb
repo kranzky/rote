@@ -2,9 +2,9 @@ module App::Actions::Widgets
   class Search < RoteAction
     param :query, ''
 
-    def handle
+    def respond
       perform "search widgets"
-      render "Widgets::SearchResults"
+      render "Widgets::List"
     end
 
     def validate

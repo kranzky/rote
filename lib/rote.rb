@@ -2,28 +2,25 @@ require 'sinatra/base'
 require 'sequel/plugins/validation_helpers'
 require 'sequel/model/errors'
 
+Thread.current[:rote] ||= Hash.new { |h, k| h[k] = {} }
+
+class RoteError < StandardError
+end
+
 module Sinatra
   module RoteHelper
     def respond(class_name, format = :html)
       action = Module.const_get("App::Actions::#{class_name}").new(params)
-      raise unless action.is_a?(RoteAction)
-      raise unless action.valid?
-      view = action.handle
-      raise unless view.is_a?(RoteView)
-      raise unless view.valid?
-      case format
-      when :html
-        halt haml(view.template, { scope: view })
-      when :json
-        halt jbuilder(view.template, { scope: view })
-      end
-      error 406
+      raise RoteError, "bad action" unless action.is_a?(RoteAction)
+      raise RoteError, action.errors unless action.valid?
+      view = action.respond
+      raise RoteError, "bad view" unless view.is_a?(RoteView)
+      raise RoteError, view.errors unless view.valid?
+      view.render(self, format)
     end
   end
   helpers RoteHelper
 end
-
-Thread.current[:rote] ||= Hash.new { |h, k| h[k] = {} }
 
 class RoteBase
   include Sequel::Plugins::ValidationHelpers::InstanceMethods
@@ -80,7 +77,7 @@ end
 
 class RoteAction < RoteBase
   def self.param(name, default=nil)
-    raise unless name.is_a?(Symbol)
+    raise RoteError, "bad action param" unless name.is_a?(Symbol)
     Thread.current[:rote][self.name][name] = default
     define_method(name, ->{ @context[name] })
   end
@@ -102,32 +99,31 @@ class RoteAction < RoteBase
     return unless success?
     class_name = sentence.split.map(&:capitalize).join
     service = Module.const_get("App::Services::#{class_name}").new(self.to_h)
-    raise unless service.is_a?(RoteService)
-    raise unless service.valid?
+    raise RoteError, "bad service" unless service.is_a?(RoteService)
+    raise RoteError, service.errors unless service.valid?
     if @success &&= service.perform
-      raise unless service.valid?
+      raise RoteError, service.errors unless service.valid?
       @context.merge!(service.to_h)
     end
-    success?
   end
 
   def render(class_name)
     view = Module.const_get("App::Views::#{class_name}").new(self.to_h)
-    raise unless view.is_a?(RoteView)
-    raise unless view.valid?
+    raise RoteError, "bad view" unless view.is_a?(RoteView)
+    raise RoteError, view.errors unless view.valid?
     view
   end
 end
 
 class RoteService < RoteBase
   def self.argument(name, default=nil)
-    raise unless name.is_a?(Symbol)
+    raise RoteError, "bad service argument" unless name.is_a?(Symbol)
     Thread.current[:rote][self.name][name] = default
     define_method(name, ->{ @context[name] })
   end
 
   def self.result(name, default=nil)
-    raise unless name.is_a?(Symbol)
+    raise RoteError, "bad service result" unless name.is_a?(Symbol)
     Thread.current[:rote][self.name][name] = default
     define_method(name, ->{ @context[name] })
     define_method("#{name}=", ->(value){ @performed = true; @context[name] = value })
@@ -150,26 +146,33 @@ end
 
 class RoteView < RoteBase
   def self.template(name)
-    raise unless name.is_a?(Symbol)
+    raise RoteError, "bad view template" unless name.is_a?(Symbol)
     Thread.current[:rote][self.name + "_template"] = name
   end
 
   def self.local(name, default=nil)
-    raise unless name.is_a?(Symbol)
+    raise RoteEror, "bad view local" unless name.is_a?(Symbol)
     Thread.current[:rote][self.name][name] = default
     define_method(name, ->{ @context[name] })
   end
 
   def initialize(locals)
 		super()
-    @template = Thread.current[:rote][self.class.name + "_template"]
     @context.keys.each do |key|
       next unless locals.include?(key)
       @context[key] = locals[key]
     end
+    @template = Thread.current[:rote][self.class.name + "_template"]
   end
 
-  def template
-    @template
+  def render(scope, format)
+    case format
+    when :html
+      scope.haml(@template, { scope: self })
+    when :json
+      scope.jbuilder(@template, { scope: self })
+    else
+      scope.error(406)
+    end
   end
 end
