@@ -9,9 +9,8 @@ gem 'puma', '~> 3.6.0'
 
 # HTTP Framework
 gem 'sinatra', '~> 2.0.0.beta2'
-
-# Logging
-gem 'semantic_logger', '~> 3.3.0'
+gem 'sinatra-contrib', '~> 2.0.0.beta2'
+#gem 'request_store', '~> 1.3.1'
 
 # ORM
 gem 'sequel', '~> 4.39.0'
@@ -20,11 +19,20 @@ gem 'sequel', '~> 4.39.0'
 gem 'pg', '~> 0.19.0'
 gem 'sequel_pg', '~> 1.6.17', require: false
 
+# Authentication
+#gem 'omniauth', '~> 1.3.1'
+
 # Authorisation
 gem 'pundit', '~> 1.1.0'
 
+# Email
+#gem 'sendgrid', '~> 1.2.4'
+
 # Background Jobs
 #gem 'sidekiq', '~> 4.2.2'
+
+# Logging
+gem 'semantic_logger', '~> 3.3.0'
 
 # Templating Engine
 gem 'hamlit', '~> 2.7.2'

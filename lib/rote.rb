@@ -132,6 +132,7 @@ class RoteService < RoteBase
     Thread.current[:rote][self.name][name] = default
     define_method(name, ->{ @context[name] })
     define_method("#{name}=", ->(value){ @context[name] = value })
+    instance_eval { private "#{name}=" }
   end
 
   def initialize(arguments={})
@@ -144,6 +145,7 @@ class RoteService < RoteBase
   end
 
   def perform
+    raise RoteError, "cannot perform twice" if @performed
     logger.info "Perform #{self.class.name.gsub('App::Services::', '')}"
     @performed = true
   end
@@ -176,7 +178,7 @@ class RoteView < RoteBase
   end
 
   def render(scope, format)
-    logger.info "Render #{self.class.name.gsub('App::Services::', '')}"
+    logger.info "Render #{self.class.name.gsub('App::Views::', '')}"
     case format
     when :html
       scope.haml(@template, { scope: self })
