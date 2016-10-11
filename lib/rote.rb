@@ -4,14 +4,20 @@ require 'sequel/model/errors'
 
 module Sinatra
   module RoteHelper
-    def handler(class_name)
+    def respond(class_name, format = :html)
       action = Module.const_get("App::Actions::#{class_name}").new(params)
       raise unless action.is_a?(RoteAction)
       raise unless action.valid?
       view = action.handle
       raise unless view.is_a?(RoteView)
       raise unless view.valid?
-      view.html(self)
+      case format
+      when :html
+        halt haml(view.template, { scope: view })
+      when :json
+        halt jbuilder(view.template, { scope: view })
+      end
+      error 406
     end
   end
   helpers RoteHelper
@@ -163,10 +169,7 @@ class RoteView < RoteBase
     end
   end
 
-  def html(renderer)
-    renderer.haml(@template, { scope: self })
-  end
-
-  def json
+  def template
+    @template
   end
 end

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Language
-ruby "2.3.1"
+ruby '2.3.1'
 gem 'require_all', '~> 1.3.3'
 
 # Rack Server
@@ -25,6 +25,11 @@ gem 'pundit', '~> 1.1.0'
 
 # Templating Engine
 gem 'hamlit', '~> 2.7.2'
+
+# JSON Rendering
+gem 'jbuilder', '~> 2.6.0'
+gem 'yajl-ruby', '~> 1.2.1'
+gem 'tilt-jbuilder', '~> 0.7.1', require: 'sinatra/jbuilder'
 
 # Canard
 
