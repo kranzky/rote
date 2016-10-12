@@ -1,3 +1,3 @@
 get '/api' do
-  respond "Widgets::Search", :json
+  respond Actions::Widgets::Search, :json
 end

@@ -9,9 +9,10 @@ module Rote
   end
 
   module Helper
-    def respond(class_name, format = :html)
-      logger.info "Processing by #{class_name} as #{format.upcase}"
-      action = Module.const_get("App::Actions::#{class_name}").new(params)
+    def respond(action_class, format = :html)
+      logger.info "Processing by #{action_class.name.gsub('App::Actions::', '')} as #{format.upcase}"
+      logger.trace "Parameters: #{params}"
+      action = action_class.new(params)
       raise Error, "bad action" unless action.is_a?(Action)
       raise Error, action.errors unless action.valid?
       view = action.respond
@@ -110,7 +111,7 @@ module Rote
     def initialize(params={})
       super()
       @context.keys.each do |key|
-        next unless params.include?(key)
+        next unless params[key]
         @context[key] = params[key]
       end
       @success = true
@@ -134,8 +135,8 @@ module Rote
       end
     end
 
-    def render(class_name)
-      view = Module.const_get("App::Views::#{class_name}").new(self.to_h)
+    def render(view_class)
+      view = view_class.new(self.to_h)
       raise Error, "bad view" unless view.is_a?(View)
       raise Error, view.errors unless view.valid?
       view
@@ -178,7 +179,7 @@ module Rote
     def initialize(arguments={})
       super()
       @context.keys.each do |key|
-        next unless arguments.include?(key)
+        next unless arguments[key]
         @context[key] = arguments[key]
       end
       @performed = false
@@ -210,7 +211,7 @@ module Rote
     def initialize(locals)
       super()
       @context.keys.each do |key|
-        next unless locals.include?(key)
+        next unless locals[key]
         @context[key] = locals[key]
       end
       @template = Thread.current[:rote][self.class.name + "_template"]

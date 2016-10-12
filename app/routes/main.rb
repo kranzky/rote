@@ -1,3 +1,3 @@
 get '/' do
-  respond "Widgets::Search"
+  respond Actions::Widgets::Search
 end

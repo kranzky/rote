@@ -1,7 +1,7 @@
 module App::Views::Widgets
   class List < Rote::View
     template :index
-    local :widgets, []
+    local :widgets
 
     def title
       "Yeh these are the results"

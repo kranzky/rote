@@ -4,7 +4,7 @@ module App::Actions::Widgets
 
     def respond
       perform "search widgets"
-      render "Widgets::List"
+      render Views::Widgets::List
     end
 
     def validate

@@ -1,7 +1,7 @@
 module App::Services
   class SearchWidgets < Rote::Service
-    argument :query, ''
-    result :widgets, []
+    argument :query
+    result :widgets
 
     def perform
       self.widgets = Models::Widget.all
