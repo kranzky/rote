@@ -2,3 +2,4 @@
 !/tmp/.keep
 /log/*.log
 /node_modules/*
+.byebug_history

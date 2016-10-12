@@ -29,7 +29,7 @@ module Rote
     end
 
     def logger
-      SemanticLogger['RotE']
+      SemanticLogger['Rote::Model']
     end
   end
 
@@ -83,10 +83,6 @@ module Rote
 
     def to_h
       @context
-    end
-
-    def logger
-      SemanticLogger['RotE']
     end
   end
 
@@ -144,6 +140,10 @@ module Rote
       raise Error, view.errors unless view.valid?
       view
     end
+
+    def logger
+      SemanticLogger['Rote::Action']
+    end
   end
 
   class Service < Base
@@ -189,6 +189,10 @@ module Rote
       validate_arguments
       validate_results if @performed
     end
+
+    def logger
+      SemanticLogger['Rote::Service']
+    end
   end
 
   class View < Base
@@ -223,6 +227,10 @@ module Rote
           scope.error(406)
         end
       end
+    end
+
+    def logger
+      SemanticLogger['Rote::View']
     end
   end
 end

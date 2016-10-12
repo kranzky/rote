@@ -3,7 +3,7 @@ SemanticLogger.add_appender(file_name: "log/#{settings.environment}.log", format
 SemanticLogger.add_appender(io: $stderr)
 helpers do
   def logger
-    SemanticLogger['RotE']
+    SemanticLogger['Sinatra']
   end
 end
 before do
