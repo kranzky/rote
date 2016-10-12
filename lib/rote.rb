@@ -10,15 +10,26 @@ module Rote
 
   module Helper
     def respond(class_name, format = :html)
-      logger.measure_info "Processed by #{class_name} as #{format.upcase}" do
-        action = Module.const_get("App::Actions::#{class_name}").new(params)
-        raise Error, "bad action" unless action.is_a?(Action)
-        raise Error, action.errors unless action.valid?
-        view = action.respond
-        raise Error, "bad view" unless view.is_a?(View)
-        raise Error, view.errors unless view.valid?
-        view.render(self, format)
-      end
+      logger.info "Processing by #{class_name} as #{format.upcase}"
+      action = Module.const_get("App::Actions::#{class_name}").new(params)
+      raise Error, "bad action" unless action.is_a?(Action)
+      raise Error, action.errors unless action.valid?
+      view = action.respond
+      raise Error, "bad view" unless view.is_a?(View)
+      raise Error, view.errors unless view.valid?
+      view.render(self, format)
+    end
+  end
+
+  Model = Class.new(Sequel::Model)
+  class Model
+    plugin :validation_helpers
+
+    def validate
+    end
+
+    def logger
+      SemanticLogger['RotE']
     end
   end
 
@@ -60,7 +71,6 @@ module Rote
     def valid?
       errors.clear
       validate
-      # TODO: warn log - show errors
       errors.empty?
     end
 
@@ -87,6 +97,20 @@ module Rote
       define_method(name, ->{ @context[name] })
     end
 
+    def self.decorate_methods
+      return unless instance_methods.include?(:respond)
+      return if Thread.current[:rote][self.name][:decorated]
+      Thread.current[:rote][self.name][:decorated] = true
+      original_method = instance_method(:respond)
+      define_method(:respond) do
+        raise Error, "cannot respond twice" if @responded
+        @responded = true
+        logger.measure_info "Responded #{self.class.name.gsub('App::Actions::', '')}" do
+          original_method.bind(self).call
+        end
+      end
+    end
+
     def initialize(params={})
       super()
       @context.keys.each do |key|
@@ -94,6 +118,8 @@ module Rote
         @context[key] = params[key]
       end
       @success = true
+      @responded = false
+      self.class.decorate_methods
     end
 
     def success?
@@ -108,7 +134,6 @@ module Rote
       raise Error, service.errors unless service.valid?
       if @success &&= service.perform
         raise Error, service.errors unless service.valid?
-        # TODO: debug log what got created or updated
         @context.merge!(service.to_h)
       end
     end
@@ -136,6 +161,20 @@ module Rote
       instance_eval { private "#{name}=" }
     end
 
+    def self.decorate_methods
+      return unless instance_methods.include?(:perform)
+      return if Thread.current[:rote][self.name][:decorated]
+      Thread.current[:rote][self.name][:decorated] = true
+      original_method = instance_method(:perform)
+      define_method(:perform) do
+        raise Error, "cannot perform twice" if @performed
+        @performed = true
+        logger.measure_info "Performed #{self.class.name.gsub('App::Services::', '')}" do
+          original_method.bind(self).call
+        end
+      end
+    end
+
     def initialize(arguments={})
       super()
       @context.keys.each do |key|
@@ -143,14 +182,7 @@ module Rote
         @context[key] = arguments[key]
       end
       @performed = false
-    end
-
-    def perform
-      raise Error, "cannot perform twice" if @performed
-      logger.info "Perform #{self.class.name.gsub('App::Services::', '')}"
-      @performed = true
-      # TODO: warn log if service fails
-      # TODO: wrap this with an alias somehow so we don't need super
+      self.class.decorate_methods
     end
 
     def validate

@@ -1,7 +1,5 @@
 module App::Models
-  class Widget < Sequel::Model
-    plugin :validation_helpers
-
+  class Widget < Rote::Model
     alias_method :to_s, :name
 
     def validate

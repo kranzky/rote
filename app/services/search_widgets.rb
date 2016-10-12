@@ -4,7 +4,6 @@ module App::Services
     result :widgets, []
 
     def perform
-      super
       self.widgets = Models::Widget.all
     end
 
