@@ -1,5 +1,5 @@
 module App::Actions::Widgets
-  class Search < RoteAction
+  class Search < Rote::Action
     param :query, ''
 
     def respond

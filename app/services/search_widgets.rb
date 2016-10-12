@@ -1,5 +1,5 @@
 module App::Services
-  class SearchWidgets < RoteService
+  class SearchWidgets < Rote::Service
     argument :query, ''
     result :widgets, []
 

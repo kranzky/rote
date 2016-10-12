@@ -1,5 +1,5 @@
 module App::Views::Widgets
-  class List < RoteView
+  class List < Rote::View
     template :index
     local :widgets, []
 

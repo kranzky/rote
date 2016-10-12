@@ -1,7 +1,6 @@
 SemanticLogger.default_level = :trace
 SemanticLogger.add_appender(file_name: "log/#{settings.environment}.log", formatter: :color)
 SemanticLogger.add_appender(io: $stderr)
-SemanticLogger['RotE'].info "Ready"
 helpers do
   def logger
     SemanticLogger['RotE']
