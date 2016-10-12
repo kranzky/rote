@@ -7,11 +7,11 @@ helpers do
   end
 end
 before do
-  Thread.current[:rote][:started] = Time.now
+  RequestStore.store[:started] = Time.now
   logger.info "Started #{request.request_method} #{request.path} for #{request.ip}"
 end
 after do
-  Thread.current[:rote][:completed] = Time.now
-  elapsed = ((Thread.current[:rote][:completed] - Thread.current[:rote][:started]) * 10000).round / 10.0
+  RequestStore.store[:completed] = Time.now
+  elapsed = ((RequestStore.store[:completed] - RequestStore.store[:started]) * 10000).round / 10.0
   logger.info "Completed #{response.status} #{Rack::Utils::HTTP_STATUS_CODES[response.status]} in #{elapsed}ms" 
 end
