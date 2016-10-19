@@ -1,6 +1,6 @@
 module App::Views::Widgets
   class List < Rote::View
-    template :index
+    template "widgets/list"
     local :widgets
 
     def title

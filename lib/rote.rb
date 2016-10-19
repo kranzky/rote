@@ -9,7 +9,7 @@ module Rote
   end
 
   module Helper
-    def respond(action_class, format = :html)
+    def respond(action_class, format: :html, template: nil)
       logger.info "Processing by #{action_class.name.gsub('App::Actions::', '')} as #{format.upcase}"
       logger.trace "Parameters: #{params}"
       action = action_class.new(params)
@@ -18,7 +18,7 @@ module Rote
       view = action.respond
       raise Error, "bad view" unless view.is_a?(View)
       raise Error, view.errors unless view.valid?
-      view.render(self, format)
+      view.render(self, template, format)
     end
   end
 
@@ -219,14 +219,14 @@ module Rote
       @sinatra = nil
     end
 
-    def render(sinatra, format)
+    def render(sinatra, template, format)
       @sinatra = sinatra
       logger.measure_info "Rendered #{self.class.name.gsub('App::Views::', '')}" do
         case format
         when :html
-          sinatra.haml(@template, { scope: self })
+          sinatra.haml(template || @template, { scope: self })
         when :json
-          sinatra.jbuilder(@template, { scope: self })
+          sinatra.jbuilder(template || @template, { scope: self })
         else
           sinatra.error(406)
         end
