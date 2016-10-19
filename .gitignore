@@ -2,6 +2,6 @@
 !/tmp/.keep
 /log/*.log
 /node_modules/*
-/www/js/application.js
-/www/js/application.js.map
 .byebug_history
+/www/*
+!/www/.keep
