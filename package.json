@@ -1,0 +1,19 @@
+{
+  "name": "rote",
+  "version": "0.1.0",
+  "description": "Ruby on the Edge",
+  "author": "Lloyd Kranzky",
+  "license": "UNLICENSE",
+  "devDependencies": {
+    "coffee-loader": "^0.7.2",
+    "coffee-script": "^1.11.1",
+    "css-loader": "^0.25.0",
+    "node-sass": "^3.10.1",
+    "sass-loader": "^4.0.2",
+    "semantic-ui-sass": "^2.1.7",
+    "style-loader": "^0.13.1",
+    "turbolinks": "^5.0.0",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.2"
+  }
+}

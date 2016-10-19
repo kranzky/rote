@@ -2,4 +2,5 @@
 !/tmp/.keep
 /log/*.log
 /node_modules/*
+/www/js/application.*
 .byebug_history
