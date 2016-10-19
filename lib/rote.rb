@@ -198,6 +198,7 @@ module Rote
 
   class View < Base
     def self.template(name)
+      name = name.to_sym if name.is_a?(String)
       raise Error, "bad view template" unless name.is_a?(Symbol)
       Thread.current[:rote][self.name + "_template"] = name
     end
