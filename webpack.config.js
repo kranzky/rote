@@ -1,11 +1,15 @@
 module.exports = {
   entry: {
-    script: './src/js/application.coffee',
-    style: './src/css/application.sass'
+    application: ['./src/js/application.coffee', './src/css/application.sass']
   },
   output: {
+    filename: '[name].js',
     path: './www/js',
-    filename: 'application.[name].js'
+  },
+  devtool: 'source-map',
+  devServer: {
+    contentBase: './www',
+    publicPath: '/js/'
   },
   module: {
     loaders: [

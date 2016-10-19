@@ -216,23 +216,33 @@ module Rote
         @context[key] = locals[key]
       end
       @template = Thread.current[:rote][self.class.name + "_template"]
+      @sinatra = nil
     end
 
-    def render(scope, format)
+    def render(sinatra, format)
+      @sinatra = sinatra
       logger.measure_info "Rendered #{self.class.name.gsub('App::Views::', '')}" do
         case format
         when :html
-          scope.haml(@template, { scope: self })
+          sinatra.haml(@template, { scope: self })
         when :json
-          scope.jbuilder(@template, { scope: self })
+          sinatra.jbuilder(@template, { scope: self })
         else
-          scope.error(406)
+          sinatra.error(406)
         end
       end
     end
 
     def logger
       SemanticLogger['Rote::View']
+    end
+
+    def script(name)
+      if Sinatra::Base.development?
+        @sinatra.haml("%script(src='//localhost:8080/#{name}')")
+      else
+        @sinatra.haml("%script(src='#{name}')")
+      end
     end
   end
 end
