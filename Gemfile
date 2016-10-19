@@ -32,10 +32,10 @@ gem 'pundit', '~> 1.1.0'
 #gem 'sidekiq', '~> 4.2.2'
 
 # Logging
-gem 'semantic_logger', '~> 3.3.0'
+gem 'semantic_logger', '~> 3.4.0'
 
 # Templating Engine
-gem 'hamlit', '~> 2.7.2'
+gem 'hamlit', '~> 2.7.5'
 
 # JSON Rendering
 gem 'jbuilder', '~> 2.6.0'
