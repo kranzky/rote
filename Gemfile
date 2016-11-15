@@ -13,7 +13,7 @@ gem 'sinatra-contrib', '~> 2.0.0.beta2'
 gem 'request_store', '~> 1.3.1'
 
 # ORM
-gem 'sequel', '~> 4.39.0'
+gem 'sequel', '~> 4.40.0'
 
 # Database
 gem 'pg', '~> 0.19.0'
@@ -39,11 +39,11 @@ gem 'hamlit', '~> 2.7.5'
 
 # JSON Rendering
 gem 'jbuilder', '~> 2.6.0'
-gem 'yajl-ruby', '~> 1.2.1'
+gem 'yajl-ruby', '~> 1.3.0'
 gem 'tilt-jbuilder', '~> 0.7.1', require: 'sinatra/jbuilder'
 
 group :development do
-  gem 'github_changelog_generator', '~> 1.13.2'
+  gem 'github_changelog_generator', '~> 1.14.2'
   gem 'gemfile_updater', '~> 0.1.0'
 end
 
