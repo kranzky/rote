@@ -28,7 +28,7 @@ RotE is simple; it just bolts together these best-of-breed components:
 * Authorisation: Pundit
 * Background Jobs: Sidekiq
 * Email: Sendgrid
-* Forms: ...
+* Forms: ???
 * HTML Templating: Hamlit
 * JSON Templating: JBuilder
 * Logging: Semantic Logger
@@ -37,6 +37,7 @@ RotE is simple; it just bolts together these best-of-breed components:
 * Data Binding: Vue.js
 * Stylesheets: SCSS
 * Scripting: Babel
+* WebGL: Pixi.js
 * Asset Build: Webpack
 * Deployment: Heroku
 

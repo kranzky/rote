@@ -17,5 +17,9 @@
     "turbolinks": "^5.0.0",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "pixi.js": "^4.1.1",
+    "vue": "^2.0.5"
   }
 }
