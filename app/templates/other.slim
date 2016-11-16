@@ -1,5 +1,7 @@
-a href="/" Home
-ol
-  - widgets.each do |widget|
-    li= widget
-p= title
+.box
+  a.button href="/" Home
+  .content
+    ol
+      - widgets.each do |widget|
+        li= widget
+    p= title

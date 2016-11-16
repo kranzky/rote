@@ -5,6 +5,7 @@
   "author": "Lloyd Kranzky",
   "license": "UNLICENSE",
   "devDependencies": {
+    "bulma": "^0.2.3",
     "coffee-loader": "^0.7.2",
     "coffee-script": "^1.11.1",
     "css-loader": "^0.25.0",
@@ -12,7 +13,6 @@
     "jquery": "^3.1.1",
     "node-sass": "^3.12.5",
     "sass-loader": "^4.0.2",
-    "semantic-ui-css": "^2.2.4",
     "style-loader": "^0.13.1",
     "turbolinks": "^5.0.0",
     "webpack": "^1.13.3",

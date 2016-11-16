@@ -33,7 +33,7 @@ RotE is simple; it just bolts together these best-of-breed components:
 * JSON Templating: JBuilder
 * Logging: Semantic Logger
 * Testing: RSpec
-* UI Framework: Semantic UI
+* UI Framework: Bulma
 * Data Binding: Vue
 * Stylesheets: SCSS
 * Scripting: Babel

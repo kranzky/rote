@@ -1,13 +1,10 @@
-require('semantic-ui-css/semantic.js')
 require('pixi.js')
-
 Vue = require('vue')
 Turbolinks = require('turbolinks')
 
 Turbolinks.start()
 
 $ ->
-  $('.ui.modal').modal('show')
   if document.getElementById('message')
     app = new Vue({
       el: '#message',
