@@ -224,7 +224,7 @@ module Rote
       logger.measure_info "Rendered #{self.class.name.gsub('App::Views::', '')}" do
         case format
         when :html
-          sinatra.haml(template || @template, { scope: self })
+          sinatra.slim(template || @template, { scope: self })
         when :json
           sinatra.jbuilder(template || @template, { scope: self })
         else
@@ -239,9 +239,9 @@ module Rote
 
     def script(name)
       if Sinatra::Base.development?
-        @sinatra.haml("%script(src='//localhost:8080/#{name}')")
+        @sinatra.slim("script(src='//localhost:8080/#{name}')")
       else
-        @sinatra.haml("%script(src='#{name}')")
+        @sinatra.slim("script(src='#{name}')")
       end
     end
   end

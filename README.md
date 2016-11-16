@@ -29,15 +29,15 @@ RotE is simple; it just bolts together these best-of-breed components:
 * Background Jobs: Sidekiq
 * Email: Sendgrid
 * Forms: ???
-* HTML Templating: Hamlit
+* HTML Templating: Slim
 * JSON Templating: JBuilder
 * Logging: Semantic Logger
 * Testing: RSpec
 * UI Framework: Semantic UI
-* Data Binding: Vue.js
+* Data Binding: Vue
 * Stylesheets: SCSS
 * Scripting: Babel
-* WebGL: Pixi.js
+* WebGL: Pixi
 * Asset Build: Webpack
 * Deployment: Heroku
 
