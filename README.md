@@ -1,25 +1,23 @@
-Ruby on the Edge
-================
+Rubies on Szyny
+===============
 
-"Ruby on the Edge", or "RotE", is an opinionated franken-framework that is
-perfect for prototyping and hackathons. Oh, and large-scale production apps too.
+Rubies on Szyny (pron. "shi-ne") is an omakase franken-framework by Kranzky. 
+
+It is perfect for prototyping, hackathons and large-scale production apps.
 
 Grok the 5-minute overview on YouTube to be enlightened, then keep reading.
 
 Overview
 --------
 
-RotE is more Railsy than Rails, because all the decisions have been made, and
-you have little say in the matter.
-
-The goal of RotE is to go from an idea to a deployed production app in under
+The goal of Szyny is to go from an idea to a deployed production app in under
 thirty minutes, including setting up all the things you'd normally leave until
 later because they're too boring and you can't decide. It makes sure you're
-doing things right before you write a line of code.
+doing things right before you write things.
 
-RotE is simple; it just bolts together these best-of-breed components:
+Szyny is simple; it just bolts together these best-of-breed components:
 
-* Language: Ruby
+* Languages: Ruby 2.4.0 and ES2015
 * Rack Server: Puma
 * HTTP Framework: Sinatra
 * ORM: Sequel
@@ -27,22 +25,24 @@ RotE is simple; it just bolts together these best-of-breed components:
 * Authentication: Omniauth
 * Authorisation: Pundit
 * Background Jobs: Sidekiq
-* Email: Sendgrid
-* Forms: ???
 * HTML Templating: Slim
 * JSON Templating: JBuilder
 * Logging: Semantic Logger
-* Testing: RSpec
-* UI Framework: Bulma
+* Testing: RSpec and Jasmine
+* UI Framework: Quasar
 * Data Binding: Vue
 * Stylesheets: SCSS
-* Scripting: Babel
-* WebGL: Pixi
 * Asset Build: Webpack
 * Deployment: Heroku
 
-It provides action objects, service objects and view models, along with a CLI
-for running it all.
+Szyny provides action objects, service objects and view models, along with a CLI
+for running it all, and a great development experience with hot reloading and
+the like. Out of the box it deploys easily to Heroku, and runs on the free tier.
+
+It has built-in support for analytics, caching, sending email, canvas rendering,
+image upload, audio, game controller input, realtime chat and all sorts of sweet
+stuff. It uses environment variables for all configuration, gracefully degrades
+when third-party services aren't configured, and supports easy feature toggling.
 
 Creating a project
 ------------------
@@ -55,7 +55,7 @@ you've never written a line of code before. Hit command-space, type "terminal",
 then type this...
 
 ```
-curl ...
+TBD
 ```
 
 Setting it up
@@ -68,10 +68,12 @@ all the things it needs.
 
 ```
 git
+rvm
 rbenv
-ruby
 bundle
-node
+nvm
+avn
+yarn
 ```
 
 Now that's all done, you can run your brand new app.
@@ -124,4 +126,4 @@ Omakase by Kranzky
 
 I have been your chef for today. I hope you've enjoyed your meal. Burp.
 
-Copyright (c) 2016 Jason Hutchens. See UNLICENSE for further details.
+Copyright (c) 2017 Jason Hutchens. See UNLICENSE for further details.

@@ -1,9 +1,9 @@
 {
-  "name": "rote",
+  "name": "Szyny",
   "version": "0.1.0",
-  "description": "Ruby on the Edge",
+  "description": "Rubies on Szyny (pron. 'shi-ne') is an omakase franken-framework by Kranzky.",
   "author": "Lloyd Kranzky",
-  "license": "UNLICENSE",
+  "license": "Unlicense",
   "devDependencies": {
     "bulma": "^0.2.3",
     "coffee-loader": "^0.7.2",
